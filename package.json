@@ -1,0 +1,27 @@
+{
+  "name": "wasm-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "assemble": "wa compile -o program.wasm hello.c",
+    "serve-demo": "static-server -i index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiexieeric/hackduke-wasm-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiexieeric/hackduke-wasm-demo/issues"
+  },
+  "homepage": "https://github.com/xiexieeric/hackduke-wasm-demo#readme",
+  "devDependencies": {
+    "static-server": "^2.2.1",
+    "webassembly": "^0.11.0",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0"
+  }
+}
