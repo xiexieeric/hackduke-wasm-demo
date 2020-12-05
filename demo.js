@@ -1,4 +1,5 @@
 (async () => {
+    const loader = require("@assemblyscript/loader");
     const importObject = {
         env: {
             abort(_msg, _file, line, column) {
@@ -6,12 +7,14 @@
             }
         }
     };
-    const module = await WebAssembly.instantiateStreaming(
+    const module = await loader.instantiate(
         fetch("build/optimized.wasm"),
         importObject
     );
     const isPrime = module.instance.exports.isPrime;
-
+    const { __newString, __getString, __retain, __release } = module.instance.exports;
+    console.log(__newString, __getString, __retain, __release);
+    console.log(module);
     const result = document.querySelector("#result");
     document.querySelector("#prime-checker").addEventListener("submit", event => {
         event.preventDefault();
