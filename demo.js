@@ -11,10 +11,18 @@
         fetch("build/optimized.wasm"),
         importObject
     );
-    const isPrime = module.instance.exports.isPrime;
-    const { __newString, __getString, __retain, __release } = module.instance.exports;
-    console.log(__newString, __getString, __retain, __release);
-    console.log(module);
+    
+    const { __newString, __getString, __retain, __release, __new } = module.exports;
+
+    const { isPrime, hanoi } = module.instance.exports;
+    const towerA = "tower a";
+    const towerB = "tower b";
+    const towerC = "tower c";
+
+    const towerAPtr = __retain(__newString(towerA));
+    const towerBPtr = __retain(__newString(towerB));
+    const towerCPtr = __retain(__newString(towerC));
+
     const result = document.querySelector("#result");
     document.querySelector("#prime-checker").addEventListener("submit", event => {
         event.preventDefault();
@@ -22,4 +30,10 @@
         const number = event.target.elements.number.value;
         result.innerText = `${number} is ${isPrime(number) ? '' : 'not '}prime.`;
     });
+
+    const value = __getString(hanoi(3, towerAPtr, towerBPtr, towerCPtr));
+    __release(towerAPtr);
+    __release(towerBPtr);
+    __release(towerCPtr);
+    console.log(value);
 })();
