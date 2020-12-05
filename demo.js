@@ -1,3 +1,14 @@
+export function hanoiJS(numPegs, towerA, towerB, towerC) {
+    if (numPegs > 0) {
+      return concat(concat(hanoiJS(numPegs - 1, towerA, towerC, towerB), concat(towerA, towerB)), hanoiJS(numPegs - 1, towerC, towerB, towerA));
+    }
+    return ";";
+  }
+  
+  function concat(a, b) {
+    return a + " " + b;
+  }
+
 (async () => {
     const loader = require("@assemblyscript/loader");
     const importObject = {
@@ -31,9 +42,18 @@
         result.innerText = `${number} is ${isPrime(number) ? '' : 'not '}prime.`;
     });
 
-    const value = __getString(hanoi(3, towerAPtr, towerBPtr, towerCPtr));
+    var t0 = performance.now();
+    let value = __getString(hanoi(20, towerAPtr, towerBPtr, towerCPtr));
+    var t1 = performance.now();
     __release(towerAPtr);
     __release(towerBPtr);
     __release(towerCPtr);
     console.log(value);
+    console.log("Time Taken: " + (t1 - t0) + " milliseconds");
+
+    var t0 = performance.now();
+    value = hanoiJS(20, "tower a", "tower b", "tower c");
+    var t1 = performance.now();
+    console.log(value);
+    console.log("Time Taken: " + (t1 - t0) + " milliseconds");
 })();
