@@ -5,7 +5,7 @@
   "main": "hello.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "assemble": "wa compile -o program.wasm hello.c",
+    "assemble": "wa compile -o math.wasm math.c",
     "serve-demo": "static-server -i index.html"
   },
   "repository": {
